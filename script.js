@@ -20,6 +20,20 @@ function loadFriends() {
   statusMessage.classList.remove("error");
   statusMessage.textContent = "Loading friends...";
 
+const xhr = new XMLHttpRequest();
+
+xhr.open("GET", "hsFriends.json");
+
+xhr.onload = function () {
+  if (xhr.status === 200) {
+  const friends = JSON.parse(xhr.responseText);
+  renderFriends(friends);
+}
+
+};
+
+xhr.send();
+}
   // CHECKPOINT 2: Write the request.
   //   - Create the request and open a GET request for friends.json.
   //   - Write the onload handler:
@@ -27,19 +41,17 @@ function loadFriends() {
   //                        then pass the array to renderFriends()
   //       other status  -> call showLoadError()
   //   - Connect onerror to showLoadError.
-  //   - Send the request LAST, after the handlers are set up.
+  //   - Send the request LAST, after the handlers are set up.        
   //
   //   Supplied safety net: put your JSON.parse line and your
   //   renderFriends call inside a try block like this one, so a
   //   typo in friends.json shows a message instead of a blank page.
   //
   //     try {
-  //       // parse the response text and call renderFriends here
+  //        const friends = JSON.parse(xhr.responseText);
   //     } catch (error) {
   //       showDataError(error);
   //     }
-
-}
 
 
 // -------------------------------------------------------------
