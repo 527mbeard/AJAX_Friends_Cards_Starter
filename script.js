@@ -10,6 +10,7 @@ const cardsContainer = document.getElementById("cards");
 const statusMessage = document.getElementById("status");
 
 // CHECKPOINT 2: When the Load Friends button is clicked, run loadFriends.
+loadButton.addEventListener("click", loadFriends);
 
 
 // -------------------------------------------------------------
@@ -20,38 +21,28 @@ function loadFriends() {
   statusMessage.classList.remove("error");
   statusMessage.textContent = "Loading friends...";
 
-const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
-xhr.open("GET", "hsFriends.json");
+  xhr.open("GET", "friends.json");
 
-xhr.onload = function () {
-  if (xhr.status === 200) {
-  const friends = JSON.parse(xhr.responseText);
-  renderFriends(friends);
+  xhr.onload = function () {
+    if (xhr.status !== 200) {
+      showLoadError();
+      return;
+    }
+
+    try {
+      const friends = JSON.parse(xhr.responseText);
+      renderFriends(friends);
+    } catch (error) {
+      showDataError(error);
+    }
+  };
+
+  xhr.onerror = showLoadError;
+
+  xhr.send();
 }
-
-};
-
-xhr.send();
-}
-  // CHECKPOINT 2: Write the request.
-  //   - Create the request and open a GET request for friends.json.
-  //   - Write the onload handler:
-  //       status 200    -> turn the response text into an array,
-  //                        then pass the array to renderFriends()
-  //       other status  -> call showLoadError()
-  //   - Connect onerror to showLoadError.
-  //   - Send the request LAST, after the handlers are set up.        
-  //
-  //   Supplied safety net: put your JSON.parse line and your
-  //   renderFriends call inside a try block like this one, so a
-  //   typo in friends.json shows a message instead of a blank page.
-  //
-  //     try {
-  //        const friends = JSON.parse(xhr.responseText);
-  //     } catch (error) {
-  //       showDataError(error);
-  //     }
 
 
 // -------------------------------------------------------------
@@ -63,19 +54,21 @@ function renderFriends(friends) {
   // Use this supplied markup inside a template literal. Replace each
   // [PLACEHOLDER] with an expression that reads the current person.
   // Hobbies is an array: show it as readable, comma-separated text.
-  
-  <div class="col-12 col-md-6 col-lg-4">
-    <article class="card h-100">
-      <div class="card-body">
-        <h2 class="card-title h4">[NAME]</h2>
-        <p class="relationship">[RELATIONSHIP]</p>
-        <p>[DETAIL]</p>
-        <p class="hobbies"><strong>Hobbies:</strong> [HOBBIES]</p>
-      </div>
-    </article>
-  </div>
-  
 
+  const cards = friends.map((friend) => `
+    <div class="col-12 col-md-6 col-lg-4">
+      <article class="card h-100">
+        <div class="card-body">
+          <h2 class="card-title h4">${friend.name}</h2>
+          <p class="relationship">${friend.relationship}</p>
+          <p>${friend.detail}</p>
+          <p class="hobbies"><strong>Hobbies:</strong> ${friend.hobbies.join(", ")}</p>
+        </div>
+      </article>
+    </div>
+  `).join("");
+
+  cardsContainer.innerHTML = cards;
 
   // Supplied success message. Keep this after the cards are updated.
   statusMessage.classList.remove("error");
