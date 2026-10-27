@@ -51,7 +51,7 @@ function renderFriends(friends) {
   // Use this supplied markup inside a template literal. Replace each
   // [PLACEHOLDER] with an expression that reads the current person.
   // Hobbies is an array: show it as readable, comma-separated text.
-  /*
+  
   <div class="col-12 col-md-6 col-lg-4">
     <article class="card h-100">
       <div class="card-body">
@@ -62,7 +62,7 @@ function renderFriends(friends) {
       </div>
     </article>
   </div>
-  */
+  
 
 
   // Supplied success message. Keep this after the cards are updated.

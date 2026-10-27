@@ -1,2 +1,22 @@
 [
+    {"name": "Liza", 
+     "relationship": "teammate", 
+     "detail": "Goes to East Brunswick High School",
+     "hobbies": ["dancing", "loves science", "loves to read"]},
+    {"name": "Alison", 
+     "relationship": "friend from middle school", 
+     "detail": "Works at Carvel",
+     "hobbies": ["varisty cheerleading captain", "went to the Formula One Canada Grand Prix", "best friend since 6th grade"]},
+    {"name": "Addison", 
+     "relationship": "old colleague and best friend from first grade", 
+     "detail": "Plays softball",
+     "hobbies": ["works at the same camp as me", "has the same car as me", "goes to Colts Neck High School for the ROTC program"]},
+     {"name": "Sarah", 
+     "relationship": "friend from middle school", 
+     "detail": "Published a book on Amazon",
+     "hobbies": ["writing", "reading", "super smart engineer"]},
+    {"name": "Aradhana", 
+     "relationship": "friend from elementary school", 
+     "detail": "Lives in my development",
+     "hobbies": ["loves dance", "reading", "has a little brother"]}
 ]
